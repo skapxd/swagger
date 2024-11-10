@@ -56,12 +56,14 @@ export const exploreApiResponseMetadata = (
       get(classProduces, 'produces'),
       methodProduces
     );
-    return mapResponsesToSwaggerResponses(
+    const _ = mapResponsesToSwaggerResponses(
       responses,
       schemas,
       produces,
       factories
     );
+    console.log(_);
+    return _
   }
   const status = getStatusCode(method);
   if (status) {

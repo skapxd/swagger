@@ -1,0 +1,3 @@
+export declare const originalCatDtoText = "\nexport class ChangedCatDto {\n  name: string;\n  status: string;\n}\n";
+export declare const changedCatDtoText = "\nexport class ChangedCatDto {\n  name: string;\n}\n";
+export declare const changedCatDtoTextTranspiled = "\"use strict\";\nObject.defineProperty(exports, \"__esModule\", { value: true });\nexports.ChangedCatDto = void 0;\nvar openapi = require(\"@nestjs/swagger\");\nvar ChangedCatDto = /** @class */ (function () {\n    function ChangedCatDto() {\n    }\n    ChangedCatDto._OPENAPI_METADATA_FACTORY = function () {\n        return { name: { required: true, type: function () { return String; } } };\n    };\n    return ChangedCatDto;\n}());\nexports.ChangedCatDto = ChangedCatDto;\n";

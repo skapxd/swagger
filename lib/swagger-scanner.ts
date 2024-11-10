@@ -44,7 +44,7 @@ export class SwaggerScanner {
       autoTagControllers = true
     } = options;
 
-    const container = (app as any).container as NestContainer;
+    const container = (app as any).container as NestContainer;   
     const internalConfigRef = (app as any).config as ApplicationConfig;
 
     const modules: Module[] = this.getModules(
@@ -57,7 +57,7 @@ export class SwaggerScanner {
 
     const denormalizedPaths = modules.map(
       ({ controllers, metatype, imports }) => {
-        let result: ModuleRoute[] = [];
+        let result: ModuleRoute[] = [];  
 
         if (deepScanRoutes) {
           // Only load submodules routes if explicitly enabled
@@ -100,7 +100,7 @@ export class SwaggerScanner {
       }
     );
 
-    const schemas = this.explorer.getSchemas();
+    const schemas = this.explorer.getSchemas();  
     this.addExtraModels(schemas, extraModels);
 
     return {

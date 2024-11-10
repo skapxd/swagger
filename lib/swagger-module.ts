@@ -33,7 +33,7 @@ export class SwaggerModule {
     const swaggerScanner = new SwaggerScanner();
     const document = swaggerScanner.scanApplication(app, options);
 
-    document.components = assignTwoLevelsDeep(
+        document.components = assignTwoLevelsDeep(
       {},
       config.components,
       document.components

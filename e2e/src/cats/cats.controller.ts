@@ -28,6 +28,7 @@ import { Cat } from './classes/cat.class';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { LettersEnum, PaginationQuery } from './dto/pagination-query.dto';
 import { CatBreed } from './enums/cat-breed.enum';
+import { reverseObjectKeys } from '../../../lib/utils/reverse-object-keys.util';
 
 @ApiSecurity('basic')
 @ApiBearerAuth()
@@ -80,9 +81,32 @@ export class CatsController {
   }
 
   @Post('explicit-body')
+  @ApiResponse({
+    event: 'myEvent',
+    // status: 403,
+    description: 'Forbidden.',
+
+    examples: {
+      mau2: {
+        summary: 'Mau example2',
+        value: reverseObjectKeys(CreateCatDto)
+      },
+      mau: {
+        summary: 'Mau example',
+        value: {
+          name: 'Mau cat',
+          age: 5,
+          breed: 'Mau'
+        }
+      }
+    }
+  })
   @ApiBody({
     type: CreateCatDto,
     examples: {
+      mau2: {
+        $ref: getSchemaPath(CreateCatDto)
+      },
       mau: {
         summary: 'Mau example',
         value: {
