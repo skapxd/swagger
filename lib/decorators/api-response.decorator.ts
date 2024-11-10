@@ -35,7 +35,14 @@ export interface ApiResponseSchemaHost
   description?: string;
 }
 
-export type ApiResponseOptions = ApiResponseMetadata | ApiResponseSchemaHost;
+export interface ApiResponseSSE extends Omit<ResponseObject, 'description'> {
+  schema?: SchemaObject & Partial<ReferenceObject>;
+  event: string;
+  status?: null | undefined
+  description?: string;
+}
+
+export type ApiResponseOptions = ApiResponseMetadata | ApiResponseSchemaHost | ApiResponseSSE;
 
 export type ApiResponseNoStatusOptions =
   | (Omit<ApiResponseCommonMetadata, 'status'> & {
@@ -60,9 +67,13 @@ export function ApiResponse(
   apiResponseMetadata.isArray = isArray;
   options.description = options.description ? options.description : '';
 
-  const groupedMetadata = {
-    [options.status || 'default']: omit(options, 'status')
-  };
+  const groupedMetadata = {};
+  if ('event' in options) {
+    groupedMetadata[options.event] = omit(options, 'status');
+  } else {
+    groupedMetadata[options.status ?? 'default'] = omit(options, 'status');
+  }
+
   return (
     target: object,
     key?: string | symbol,
